@@ -4,6 +4,7 @@ int intercefaceGeral(User * usuario){
         system("cls");
         printf("\n\n\t\t Interface do Programa! \n\n");
         printf("\n Opcoes Gerais: \n");
+        printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");
         printf("\n\t2 - mostra Usuarios");
         printf("\n\t3 - procura Usuarios");
