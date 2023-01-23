@@ -73,13 +73,19 @@ void imprimirPerfil(Perfil* usuarios){
     printf("\t%d \n", usuarios->idade);
 }
 
-Perfil *procuraUserId(User* usuarios, int id){
+User *procuraUserId(User* usuarios, int id){
     if(usuarios == NULL)printf("\n Nenhum usuario encontrado! \n");
     if(usuarios->perfilDoUsuario->id == id){
         printf("\nPerfil encontrado: \n");
         printf("\n\n\tid\t|\tidade\n");
-        return usuarios->perfilDoUsuario;}
-    else return procuraUserId(usuarios->proximo, id);
+        return usuarios;
+    }else return procuraUserId(usuarios->proximo, id);
+}
+Perfil *procuraUserId2(User* usuarios, int id){
+    if(usuarios == NULL)return NULL;
+    if(usuarios->perfilDoUsuario->id == id){
+        return usuarios->perfilDoUsuario;
+    }else return procuraUserId2(usuarios->proximo, id);
 }
 Perfil *procuraUserNome(User* usuarios, char nome[150]){
     if(usuarios == NULL)printf("\n Nenhum usuario encontrado! \n");
@@ -88,4 +94,61 @@ Perfil *procuraUserNome(User* usuarios, char nome[150]){
         printf("\n\n\tid\t|\tnome\t|\tidade\n");
         return usuarios->perfilDoUsuario;}
     else return procuraUserNome(usuarios->proximo, nome);
+}
+
+User* removeUserId(User* usuarios, int id){
+    if(usuarios == NULL){
+        return usuarios;
+    }else{
+        User *inicio = usuarios;
+        User *anterior = NULL;
+        while(usuarios != NULL){
+            if(usuarios->perfilDoUsuario->id == id){
+                printf("\n \t!! Removendo o usuario : %s !! \n", usuarios->perfilDoUsuario->nome);
+                if(anterior == NULL){
+                    User *proximoAux = usuarios->proximo;
+                    free(usuarios->perfilDoUsuario->nome); 
+                    free(usuarios->perfilDoUsuario); 
+                    free(usuarios); 
+                    return proximoAux;
+                }else{
+                    anterior->proximo = usuarios->proximo;
+                    free(usuarios->perfilDoUsuario->nome); 
+                    free(usuarios->perfilDoUsuario); 
+                    free(usuarios);                 
+                    return inicio;
+                }
+            }
+            anterior = usuarios; 
+            usuarios = usuarios->proximo;
+        }
+    }
+}
+User* removeUserNome(User* usuarios, char nome[150]){
+    if(usuarios == NULL){
+        return usuarios;
+    }else{
+        User *inicio = usuarios;
+        User *anterior = NULL;
+        while(usuarios != NULL){
+            if(strcmp(usuarios->perfilDoUsuario->nome ,nome)== 0){
+                printf("\n \t!! Removendo o usuario : %s !! \n", usuarios->perfilDoUsuario->nome);
+                if(anterior == NULL){
+                    User *proximoAux = usuarios->proximo;
+                    free(usuarios->perfilDoUsuario->nome); 
+                    free(usuarios->perfilDoUsuario); 
+                    free(usuarios); 
+                    return proximoAux;
+                }else{
+                    anterior->proximo = usuarios->proximo;
+                    free(usuarios->perfilDoUsuario->nome); 
+                    free(usuarios->perfilDoUsuario); 
+                    free(usuarios);                 
+                    return inicio;
+                }
+            }
+            anterior = usuarios; 
+            usuarios = usuarios->proximo;
+        }
+    }
 }
