@@ -6,7 +6,7 @@ typedef struct filaRequisicoes{
  struct filaRequisicoes *proximo;
 }Fila;
 
-Fila *insereSolicitacao(Fila *pilha, int id){
+Fila *enviaSolicitacao(Fila *pilha, int id){
     if (pilha == NULL){
         Fila *filaReq = (Fila *)malloc(sizeof(Fila));
         filaReq->id = id;

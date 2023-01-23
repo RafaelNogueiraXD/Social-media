@@ -15,16 +15,16 @@ int intercefaceGeral(User * usuario){
             printf("\n\n Opcoes para o usuario %s: \n", usuario->perfilDoUsuario->nome);
             printf("\n\t6 - ver solicitacaos ");
             printf("\n\t7 - enviar solicitacao ");
-            printf("\n\t8 - recusar solicitacao ");
-            printf("\n\t9 - sair da conta(Logout)");
+            printf("\n\t8 - aceita solicitacao ");
+            printf("\n\t9 - recusar solicitacao ");
+            printf("\n\t100 - sair da conta(Logout)");
         }
         printf("\nEscolha: ");
         scanf("%d",&comando);
         getchar();
         return comando; 
 }
-User *injetarUsuarios(){
-    User* fakes = NULL;
-    for (int i = 0; i < 10; i++)fakes = insereUserRand(fakes);
-    return fakes;
+User *injetarUsuarios(User*usuario){
+    for (int i = 0; i < 10; i++)usuario = insereUserRand(usuario);
+    return usuario;
 }
