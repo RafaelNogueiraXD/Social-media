@@ -120,6 +120,8 @@ Perfil *procuraUserId2(User *usuarios, int id)
     else
         return procuraUserId2(usuarios->proximo, id);
 }
+
+
 Perfil *procuraUserNome(User *usuarios, char nome[150])
 {
     if (usuarios == NULL){
@@ -173,6 +175,9 @@ User *removeUserId(User *usuarios, int id)
         }
     }
 }
+
+
+
 User *removeUserNome(User *usuarios, char nome[150])
 {
     if (usuarios == NULL)

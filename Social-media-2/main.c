@@ -59,7 +59,7 @@ int main()
             break;
         case 8: // aceita convites
             printf("\n aceitando convite ... ");
-            
+            aceitaSolicitacao(usuarioEspecifico->amigosPendentes,usuarioEspecifico,usuario);
             break;
         case 9: // recusa convites
             printf("\n recusando convite ... ");
