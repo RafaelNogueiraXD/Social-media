@@ -39,31 +39,65 @@ Fila *removeSolicitacao(Fila *pilha)
 
 Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
 {
+
+
+
     if (pilha != NULL)
     {
         User *usuAux = NULL;
-        User *proximoAux = NULL;
-        User *amigo=NULL;
+        User *proximoAux1 = NULL, *proximoAux2 = NULL;
+        User *amigo1 = NULL, *amigo2 = NULL;
 
         usuAux = procuraUserId(usuarios, pilha->id);
 
-        amigo=(User *)malloc(sizeof(User));
-        amigo->perfilDoUsuario=(Perfil *)malloc(sizeof(Perfil));
-        amigo->perfilDoUsuario->nome=(char *)malloc(sizeof(char) * 150);
+        amigo1 = (User *)malloc(sizeof(User));
+        amigo1->perfilDoUsuario = (Perfil *)malloc(sizeof(Perfil));
+        amigo1->perfilDoUsuario->nome = (char *)malloc(sizeof(char) * 150);
+
+        amigo2 = (User *)malloc(sizeof(User));
+        amigo2->perfilDoUsuario = (Perfil *)malloc(sizeof(Perfil));
+        amigo2->perfilDoUsuario->nome = (char *)malloc(sizeof(char) * 150);
 
         if (usuarioEspecifico->listaDeAmigos == NULL)
         {
-            usuarioEspecifico->listaDeAmigos = amigo;
-            usuarioEspecifico->listaDeAmigos->proximo=NULL;
+            usuarioEspecifico->listaDeAmigos = amigo1;
+            usuarioEspecifico->listaDeAmigos->proximo = NULL;
+        }
+        else
+        {
+
+            proximoAux1 = usuarioEspecifico->listaDeAmigos;
+            usuarioEspecifico->listaDeAmigos = amigo1;
+            usuarioEspecifico->listaDeAmigos->proximo = proximoAux1;
         }
 
-        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->id=usuAux->perfilDoUsuario->id;
-        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->idade=usuAux->perfilDoUsuario->idade;
-        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->nome=usuAux->perfilDoUsuario->nome;
+        if (usuAux->listaDeAmigos == NULL)
+        {
+            usuAux->listaDeAmigos = amigo2;
+            usuAux->listaDeAmigos->proximo = NULL;
+        }
+        else
+        {
 
-        usuarioEspecifico->listaDeAmigos = usuAux;
-        usuarioEspecifico->listaDeAmigos->proximo = proximoAux;
-        removeSolicitacao(pilha);
+            proximoAux2 = usuAux->listaDeAmigos;
+            usuAux->listaDeAmigos = amigo2;
+            usuAux->listaDeAmigos->proximo = proximoAux2;
+        }
+
+        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->id = usuAux->perfilDoUsuario->id;
+        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->idade = usuAux->perfilDoUsuario->idade;
+        usuarioEspecifico->listaDeAmigos->perfilDoUsuario->nome = usuAux->perfilDoUsuario->nome;
+        printf("\n\nAmigo de U.E.:\n\n");
+        imprimirPerfil(usuarioEspecifico->listaDeAmigos->perfilDoUsuario);
+
+        usuAux->listaDeAmigos->perfilDoUsuario->id = usuarioEspecifico->perfilDoUsuario->id;
+        usuAux->listaDeAmigos->perfilDoUsuario->idade = usuarioEspecifico->perfilDoUsuario->idade;
+        usuAux->listaDeAmigos->perfilDoUsuario->nome = usuarioEspecifico->perfilDoUsuario->nome;
+        printf("\n\nAmigo do U.A.:\n\n");
+        imprimirPerfil(usuAux->listaDeAmigos->perfilDoUsuario);
+
+        pilha = removeSolicitacao(pilha);
+        usuarioEspecifico->amigosPendentes=pilha;
     }
 }
 
