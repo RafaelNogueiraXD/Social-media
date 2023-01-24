@@ -121,6 +121,7 @@ Perfil *procuraUserId2(User *usuarios, int id)
         return procuraUserId2(usuarios->proximo, id);
 }
 
+Perfil* printaAmigos(User *usuarios){}
 
 Perfil *procuraUserNome(User *usuarios, char nome[150])
 {
@@ -175,7 +176,6 @@ User *removeUserId(User *usuarios, int id)
         }
     }
 }
-
 
 
 User *removeUserNome(User *usuarios, char nome[150])

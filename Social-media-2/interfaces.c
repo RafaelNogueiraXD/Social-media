@@ -1,7 +1,7 @@
 #include "testes/factory.c"
 int intercefaceGeral(User * usuario){
     int comando = 0;
-        system("cls");
+        //system("clear");
         printf("\n Opcoes Gerais: \n");
         printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");

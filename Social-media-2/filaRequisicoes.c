@@ -7,6 +7,36 @@ typedef struct filaRequisicoes
     struct filaRequisicoes *proximo;
 } Fila;
 
+// int verificaID( User *lista, char *nome)
+// {
+//     Node *listaAux = lista;
+//     int contador = 0;
+//     while (listaAux != NULL)
+//     {
+//         if (strncmp(nome, listaAux->nome, 100) == 0)
+//             return 1;
+
+//         else
+//             listaAux = listaAux->proximo;
+//     }
+
+//     return 0;
+// }
+
+int verificaFila(int id, Fila *pilha)
+{
+    Fila *pilhaux = pilha;
+
+    while (pilhaux != NULL)
+    {
+        if (pilhaux->id == id)
+            return 1;
+        else
+            pilhaux = pilhaux->proximo;
+    }
+    return 0;
+}
+
 Fila *enviaSolicitacao(Fila *pilha, int id)
 {
     if (pilha == NULL)
@@ -37,18 +67,29 @@ Fila *removeSolicitacao(Fila *pilha)
         return NULL;
 }
 
-Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
+Fila *rejeitaTodos(Fila *pilha, User *usuarioEspecifico, User *usuarios)
 {
 
+    while (pilha != NULL)
+    {
+        pilha = removeSolicitacao(pilha);
+    }
+    return pilha;
+}
 
-
+Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
+{
     if (pilha != NULL)
     {
+
         User *usuAux = NULL;
         User *proximoAux1 = NULL, *proximoAux2 = NULL;
         User *amigo1 = NULL, *amigo2 = NULL;
 
         usuAux = procuraUserId(usuarios, pilha->id);
+
+        if (usuAux == NULL)
+            return NULL;
 
         amigo1 = (User *)malloc(sizeof(User));
         amigo1->perfilDoUsuario = (Perfil *)malloc(sizeof(Perfil));
@@ -97,8 +138,20 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
         imprimirPerfil(usuAux->listaDeAmigos->perfilDoUsuario);
 
         pilha = removeSolicitacao(pilha);
-        usuarioEspecifico->amigosPendentes=pilha;
+        usuarioEspecifico->amigosPendentes = pilha;
+        return usuarioEspecifico->amigosPendentes;
     }
+    else
+        return NULL;
+}
+
+Fila *aceitaTodas(Fila *pilha, User *usuarioEspecifico, User *usuarios)
+{
+    while (pilha != NULL)
+    {
+        pilha = aceitaSolicitacao(pilha, usuarioEspecifico, usuarios);
+    }
+    return pilha;
 }
 
 void imprimirSolicitacao(Fila *pilha, User *usuarios)

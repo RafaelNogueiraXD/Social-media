@@ -49,21 +49,38 @@ int main()
         case 7: // envia convites
             printf("\n enviando convite ... ");
             User *futuroAmigo = NULL;
-            printf("\n Digite o id do usuario: ");
-            scanf("%d", &op);
+            do
+            {
+                printf("\n Digite o id de outro usuario: ");
+                scanf("%d", &op);
+            } while (usuarioEspecifico->perfilDoUsuario->id == op);
             futuroAmigo = procuraUserId(usuario, op);
-            if(futuroAmigo != NULL){
+
+            if (verificaFila(op, futuroAmigo->amigosPendentes) == 1)
+            {
+                printf("\n\n\n\nERRO\n\n\n\n");
+                break;
+            }
+
+            if (futuroAmigo != NULL)
+            {
                 imprimirPerfil(futuroAmigo->perfilDoUsuario);
                 futuroAmigo->amigosPendentes = enviaSolicitacao(futuroAmigo->amigosPendentes, usuarioEspecifico->perfilDoUsuario->id);
             }
             break;
         case 8: // aceita convites
             printf("\n aceitando convite ... ");
-            aceitaSolicitacao(usuarioEspecifico->amigosPendentes,usuarioEspecifico,usuario);
+            usuarioEspecifico->amigosPendentes = aceitaSolicitacao(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
             break;
         case 9: // recusa convites
             printf("\n recusando convite ... ");
             usuarioEspecifico->amigosPendentes = removeSolicitacao(usuarioEspecifico->amigosPendentes);
+            break;
+        case 20:
+            usuarioEspecifico->amigosPendentes = aceitaTodas(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
+            break;
+        case 21:
+            usuarioEspecifico->amigosPendentes = rejeitaTodos(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
             break;
         case 100:
             usuarioEspecifico = NULL;
@@ -76,8 +93,8 @@ int main()
             comando != 0 ? printf("\n opcao invalida \n") : printf("\n encerrando programa \n");
             break;
         }
-        //printf("\n\n\tClique qualquer botao para continuar!");
-        // getch();
+        // printf("\n\n\tClique qualquer botao para continuar!");
+        //  getch();
     } while (comando != 0);
     // usuario = insereUser(usuario);
     // printf("\nDigite o nome do usuario que deseja ver: ");
