@@ -22,7 +22,7 @@ int main()
             break;
         case 3: // procura por usuario especifico
             imprimirUsers(usuario);
-            printf("\n Deseja procurar por:\n\t 1 - nome\n\t 2 - ID");
+            printf("\n Deseja procurar por:\n\t 1 - nome\n\t 2 - ID\nEscolha: ");
             scanf("%d",&op);
             getchar();
             if(op == 1 ){
@@ -41,12 +41,28 @@ int main()
             break;
         case 4: // remove usuario
             imprimirUsers(usuario);
+            printf("\n Deseja apagar por:\n\t1 - Nome\n\t2 - ID\nEscolha: ");
+            scanf("%d", &op);
+            getchar();
+            if(op == 1){
+                char nome[150];
+                printf("\n Digite o nome do usuario: ");
+                gets(nome);
+                if (usuarioEspecifico != NULL)
+                    if(strcmp(usuarioEspecifico->perfilDoUsuario->nome, nome) == 0)
+                    usuarioEspecifico = NULL;
+                usuario = removeUserNome(usuario, nome);
+
+            }else if(op == 2){
             printf("\n Digite o id do usuario que deseja remover: ");
             scanf("%d", &op);
-            if (usuarioEspecifico != NULL)
-                if (usuarioEspecifico->perfilDoUsuario->id == op)
-                    usuarioEspecifico = NULL;
-            usuario = removeUserId(usuario, op);
+                if (usuarioEspecifico != NULL)
+                    if (usuarioEspecifico->perfilDoUsuario->id == op)
+                        usuarioEspecifico = NULL;
+                usuario = removeUserId(usuario, op);
+            }else{
+                printf("\n opcao invalida \n");
+            }
             break;
         case 5: // seleciona usuario
             imprimirUsers(usuario);
