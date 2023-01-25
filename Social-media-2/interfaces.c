@@ -1,8 +1,8 @@
 #include "testes/factory.c"
-int intercefaceGeral(User * usuario){
+int intercefaceGeral(User * usuario, User *listaUsuarios){
     int comando = 0;
         //system("clear");
-        printf("\n Opcoes Gerais: \t\t\tNº usuarios: %d \n", 0);
+        printf("\n Opcoes Gerais: \t\t\tNº usuarios: %d \n", numUsuarios(listaUsuarios));
         printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");
         printf("\n\t2 - mostra Usuarios");
@@ -23,7 +23,7 @@ int intercefaceGeral(User * usuario){
         scanf("%d",&comando);
         if(usuario == NULL && comando>5 && comando!=99){
             printf("Digite uma opcao valida\n");
-            return intercefaceGeral(usuario);
+            return intercefaceGeral(usuario,listaUsuarios);
         }
         getchar();
         return comando; 

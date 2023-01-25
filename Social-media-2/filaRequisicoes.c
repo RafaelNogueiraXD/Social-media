@@ -148,14 +148,14 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->id = usuAux->perfilDoUsuario->id;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->idade = usuAux->perfilDoUsuario->idade;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->nome = usuAux->perfilDoUsuario->nome;
-        printf("\n\nAmigo de U.E.:\n\n");
-        imprimirPerfil(usuarioEspecifico->listaDeAmigos->perfilDoUsuario);
+        // printf("\n\nAmigo de U.E.:\n\n");
+        // imprimirPerfil(usuarioEspecifico->listaDeAmigos->perfilDoUsuario);
 
         usuAux->listaDeAmigos->perfilDoUsuario->id = usuarioEspecifico->perfilDoUsuario->id;
         usuAux->listaDeAmigos->perfilDoUsuario->idade = usuarioEspecifico->perfilDoUsuario->idade;
         usuAux->listaDeAmigos->perfilDoUsuario->nome = usuarioEspecifico->perfilDoUsuario->nome;
-        printf("\n\nAmigo do U.A.:\n\n");
-        imprimirPerfil(usuAux->listaDeAmigos->perfilDoUsuario);
+        // printf("\n\nAmigo do U.A.:\n\n");
+        // imprimirPerfil(usuAux->listaDeAmigos->perfilDoUsuario);
 
         pilha = removeSolicitacao(pilha);
         usuarioEspecifico->amigosPendentes = pilha;

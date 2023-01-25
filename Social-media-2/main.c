@@ -11,7 +11,7 @@ int main()
 
     do
     {
-        comando = intercefaceGeral(usuarioEspecifico);
+        comando = intercefaceGeral(usuarioEspecifico, usuario);
         switch (comando)
         {
         case 1: // cria novo user
@@ -23,19 +23,24 @@ int main()
         case 3: // procura por usuario especifico
             imprimirUsers(usuario);
             printf("\n Deseja procurar por:\n\t 1 - nome\n\t 2 - ID\nEscolha: ");
-            scanf("%d",&op);
+            scanf("%d", &op);
             getchar();
-            if(op == 1 ){
+            if (op == 1)
+            {
                 char nome[150];
                 printf("\n Digite o nome do usuario: ");
                 gets(nome);
                 imprimirPerfil(procuraUserNome(usuario, nome));
-            }else if(op == 2){
+            }
+            else if (op == 2)
+            {
                 printf("\n Digite o id do usuario: ");
                 scanf("%d", &op);
                 getchar();
                 imprimirPerfil(procuraUserId2(usuario, op));
-            }else{
+            }
+            else
+            {
                 printf("\n opcao invalida \n");
             }
             break;
@@ -44,23 +49,27 @@ int main()
             printf("\n Deseja apagar por:\n\t1 - Nome\n\t2 - ID\nEscolha: ");
             scanf("%d", &op);
             getchar();
-            if(op == 1){
+            if (op == 1)
+            {
                 char nome[150];
                 printf("\n Digite o nome do usuario: ");
                 gets(nome);
                 if (usuarioEspecifico != NULL)
-                    if(strcmp(usuarioEspecifico->perfilDoUsuario->nome, nome) == 0)
-                    usuarioEspecifico = NULL;
+                    if (strcmp(usuarioEspecifico->perfilDoUsuario->nome, nome) == 0)
+                        usuarioEspecifico = NULL;
                 usuario = removeUserNome(usuario, nome);
-
-            }else if(op == 2){
-            printf("\n Digite o id do usuario que deseja remover: ");
-            scanf("%d", &op);
+            }
+            else if (op == 2)
+            {
+                printf("\n Digite o id do usuario que deseja remover: ");
+                scanf("%d", &op);
                 if (usuarioEspecifico != NULL)
                     if (usuarioEspecifico->perfilDoUsuario->id == op)
                         usuarioEspecifico = NULL;
                 usuario = removeUserId(usuario, op);
-            }else{
+            }
+            else
+            {
                 printf("\n opcao invalida \n");
             }
             break;
@@ -98,7 +107,7 @@ int main()
                     break;
                 }
 
-                imprimirPerfil(futuroAmigo->perfilDoUsuario);
+                // imprimirPerfil(futuroAmigo->perfilDoUsuario);
                 futuroAmigo->amigosPendentes = enviaSolicitacao(futuroAmigo->amigosPendentes, usuarioEspecifico->perfilDoUsuario->id);
             }
             break;
@@ -117,21 +126,23 @@ int main()
             usuarioEspecifico->amigosPendentes = rejeitaTodos(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
             break;
         case 23:
-            printf("\n\n\n\nnumAmigos=%d\n\n\n\n",numAmigos(usuarioEspecifico->listaDeAmigos));
+            printf("\n\n\n\nnumAmigos=%d\n\n\n\n", numAmigos(usuarioEspecifico->listaDeAmigos));
             break;
         case 24:
-            printf("\n\n\n\nnumUsers=%d\n\n\n\n",numUsuarios(usuario));
+            printf("\n\n\n\nnumUsers=%d\n\n\n\n", numUsuarios(usuario));
             break;
         case 25:
-            printf("\n\n\n\nnumsolicitacoes=%d\n\n\n\n",numSolicitacoes(usuarioEspecifico->amigosPendentes));
+            printf("\n\n\n\nnumsolicitacoes=%d\n\n\n\n", numSolicitacoes(usuarioEspecifico->amigosPendentes));
             break;
+        case 27:
+        if(quemEhOPerfilMaisAmigo(usuario)!=NULL)
+            imprimirPerfil(quemEhOPerfilMaisAmigo(usuario)->perfilDoUsuario);
         case 100:
             usuarioEspecifico = NULL;
             break;
         case 99:
             usuario = injetarUsuarios(usuario);
             break;
-
         default:
             comando != 0 ? printf("\n opcao invalida \n") : printf("\n encerrando programa \n");
             break;

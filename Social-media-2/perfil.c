@@ -11,7 +11,7 @@ typedef struct perfil Perfil;
 struct user
 {
     Perfil *perfilDoUsuario;                 // informações do usuario
-    struct user *listaDeAmigos;                   // lista de amigos já confirmados
+    struct user *listaDeAmigos;              // lista de amigos já confirmados
     struct filaRequisicoes *amigosPendentes; // fila de amigos ainda não confirmados
     struct user *proximo;                    // ponteiro para o próximo usuario da lista
 };
@@ -106,32 +106,37 @@ User *procuraUserId(User *usuarios, int id)
         return procuraUserId(usuarios->proximo, id);
 }
 
-int numAmigos(User *AmigosUsuario){
+int numAmigos(User *AmigosUsuario)
+{
 
-    User *AmigoAux=AmigosUsuario;
-    int contador=0;
+    User *AmigoAux = AmigosUsuario;
+    int contador = 0;
 
-    if(AmigoAux==NULL)return NULL;
+    if (AmigoAux == NULL)
+        return NULL;
 
-    while(AmigoAux!=NULL){
+    while (AmigoAux != NULL)
+    {
         contador++;
-        AmigoAux=AmigoAux->proximo;
+        AmigoAux = AmigoAux->proximo;
     }
 
     return contador;
-
 }
 
-int numUsuarios(User *usuarios){
-    
-    User *usuaux=usuarios;
-    int contador=0;
+int numUsuarios(User *usuarios)
+{
 
-    if(usuaux==NULL)return NULL;
+    User *usuaux = usuarios;
+    int contador = 0;
 
-    while(usuaux!=NULL){
+    if (usuaux == NULL)
+        return NULL;
+
+    while (usuaux != NULL)
+    {
         contador++;
-        usuaux= usuaux->proximo;
+        usuaux = usuaux->proximo;
     }
 
     return contador;
@@ -152,11 +157,12 @@ Perfil *procuraUserId2(User *usuarios, int id)
         return procuraUserId2(usuarios->proximo, id);
 }
 
-Perfil* printaAmigos(User *usuarios){}
+Perfil *printaAmigos(User *usuarios) {}
 
 Perfil *procuraUserNome(User *usuarios, char nome[150])
 {
-    if (usuarios == NULL){
+    if (usuarios == NULL)
+    {
         printf("\n Nenhum usuario encontrado! \n");
         return NULL;
     }
@@ -208,7 +214,6 @@ User *removeUserId(User *usuarios, int id)
     }
 }
 
-
 User *removeUserNome(User *usuarios, char nome[150])
 {
     if (usuarios == NULL)
@@ -247,4 +252,23 @@ User *removeUserNome(User *usuarios, char nome[150])
     }
 }
 
+User *quemEhOPerfilMaisAmigo(User *listaUser)
+{
 
+    int maior = 0, atual = 0;
+
+    User *listaUserAux = listaUser;
+    User *userAtual = NULL;
+
+    while (listaUserAux != NULL)
+    {
+        atual = numAmigos(listaUserAux->listaDeAmigos);
+        if (atual > maior)
+        {
+            maior = atual;
+            userAtual = listaUserAux;
+        }
+        listaUserAux = listaUserAux->proximo;
+    }
+    return userAtual;
+}
