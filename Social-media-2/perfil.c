@@ -106,6 +106,37 @@ User *procuraUserId(User *usuarios, int id)
         return procuraUserId(usuarios->proximo, id);
 }
 
+int numAmigos(User *AmigosUsuario){
+
+    User *AmigoAux=AmigosUsuario;
+    int contador=0;
+
+    if(AmigoAux==NULL)return NULL;
+
+    while(AmigoAux!=NULL){
+        contador++;
+        AmigoAux=AmigoAux->proximo;
+    }
+
+    return contador;
+
+}
+
+int numUsuarios(User *usuarios){
+    
+    User *usuaux=usuarios;
+    int contador=0;
+
+    if(usuaux==NULL)return NULL;
+
+    while(usuaux!=NULL){
+        contador++;
+        usuaux= usuaux->proximo;
+    }
+
+    return contador;
+}
+
 Perfil *procuraUserId2(User *usuarios, int id)
 {
     if (usuarios == NULL)
@@ -215,3 +246,5 @@ User *removeUserNome(User *usuarios, char nome[150])
         }
     }
 }
+
+

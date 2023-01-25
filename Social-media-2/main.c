@@ -56,14 +56,19 @@ int main()
             } while (usuarioEspecifico->perfilDoUsuario->id == op);
             futuroAmigo = procuraUserId(usuario, op);
 
-            if (verificaFila(op, futuroAmigo->amigosPendentes) == 1)
-            {
-                printf("\n\n\n\nERRO\n\n\n\n");
-                break;
-            }
-
             if (futuroAmigo != NULL)
             {
+                if (verificaFila(op, usuarioEspecifico->amigosPendentes) == 1)
+                {
+                    printf("\n\n\n\nErro! Voce ja possui uma solicitacao desse usuario\n\n\n\n");
+                    break;
+                }
+                if (verificaFila(usuarioEspecifico->perfilDoUsuario->id, futuroAmigo->amigosPendentes) == 1)
+                {
+                    printf("\n\n\n\nErro! Voce ja enviou uma solicitacao para esse usuario\n\n\n\n");
+                    break;
+                }
+
                 imprimirPerfil(futuroAmigo->perfilDoUsuario);
                 futuroAmigo->amigosPendentes = enviaSolicitacao(futuroAmigo->amigosPendentes, usuarioEspecifico->perfilDoUsuario->id);
             }
@@ -81,6 +86,15 @@ int main()
             break;
         case 21:
             usuarioEspecifico->amigosPendentes = rejeitaTodos(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
+            break;
+        case 23:
+            printf("\n\n\n\nnumAmigos=%d\n\n\n\n",numAmigos(usuarioEspecifico->listaDeAmigos));
+            break;
+        case 24:
+            printf("\n\n\n\nnumUsers=%d\n\n\n\n",numUsuarios(usuario));
+            break;
+        case 25:
+            printf("\n\n\n\nnumsolicitacoes=%d\n\n\n\n",numSolicitacoes(usuarioEspecifico->amigosPendentes));
             break;
         case 100:
             usuarioEspecifico = NULL;

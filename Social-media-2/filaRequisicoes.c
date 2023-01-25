@@ -23,17 +23,37 @@ typedef struct filaRequisicoes
 //     return 0;
 // }
 
+int numSolicitacoes(Fila *pilha){
+
+    Fila *pilhaux=pilha;
+    int contador=0;
+
+    if(pilhaux==NULL)return NULL;
+
+    while(pilhaux!=NULL){
+        contador++;
+        pilhaux= pilhaux->proximo;
+    }
+
+    return contador;
+}
+
+
 int verificaFila(int id, Fila *pilha)
 {
     Fila *pilhaux = pilha;
 
     while (pilhaux != NULL)
     {
-        if (pilhaux->id == id)
+        printf("\n\n\nid:%d == %d\n\n\n",pilhaux->id,id);
+        if (pilhaux->id == id){
+            printf("retornou 1");
             return 1;
+        }
         else
             pilhaux = pilhaux->proximo;
     }
+    printf("retornou 0");
     return 0;
 }
 
