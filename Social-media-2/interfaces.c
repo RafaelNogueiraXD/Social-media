@@ -2,7 +2,7 @@
 int intercefaceGeral(User * usuario){
     int comando = 0;
         //system("clear");
-        printf("\n Opcoes Gerais: \n");
+        printf("\n Opcoes Gerais: \t\t\tNº usuarios: %d \n", 0);
         printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");
         printf("\n\t2 - mostra Usuarios");
@@ -28,6 +28,7 @@ int intercefaceGeral(User * usuario){
         getchar();
         return comando; 
 }
+
 User *injetarUsuarios(User*usuario){
     for (int i = 0; i < 10; i++)usuario = insereUserRand(usuario);
     return usuario;
