@@ -22,9 +22,22 @@ int main()
             break;
         case 3: // procura por usuario especifico
             imprimirUsers(usuario);
-            printf("\n Digite o id do usuario: ");
-            scanf("%d", &op);
-            imprimirPerfil(procuraUserId2(usuario, op));
+            printf("\n Deseja procurar por:\n\t 1 - nome\n\t 2 - ID");
+            scanf("%d",&op);
+            getchar();
+            if(op == 1 ){
+                char nome[150];
+                printf("\n Digite o nome do usuario: ");
+                gets(nome);
+                imprimirPerfil(procuraUserNome(usuario, nome));
+            }else if(op == 2){
+                printf("\n Digite o id do usuario: ");
+                scanf("%d", &op);
+                getchar();
+                imprimirPerfil(procuraUserId2(usuario, op));
+            }else{
+                printf("\n opcao invalida \n");
+            }
             break;
         case 4: // remove usuario
             imprimirUsers(usuario);
