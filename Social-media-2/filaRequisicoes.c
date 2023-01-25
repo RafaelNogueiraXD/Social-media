@@ -7,21 +7,6 @@ typedef struct filaRequisicoes
     struct filaRequisicoes *proximo;
 } Fila;
 
-// int verificaID( User *lista, char *nome)
-// {
-//     Node *listaAux = lista;
-//     int contador = 0;
-//     while (listaAux != NULL)
-//     {
-//         if (strncmp(nome, listaAux->nome, 100) == 0)
-//             return 1;
-
-//         else
-//             listaAux = listaAux->proximo;
-//     }
-
-//     return 0;
-// }
 
 int numSolicitacoes(Fila *pilha){
 
@@ -148,14 +133,11 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->id = usuAux->perfilDoUsuario->id;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->idade = usuAux->perfilDoUsuario->idade;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->nome = usuAux->perfilDoUsuario->nome;
-        // printf("\n\nAmigo de U.E.:\n\n");
-        // imprimirPerfil(usuarioEspecifico->listaDeAmigos->perfilDoUsuario);
+
 
         usuAux->listaDeAmigos->perfilDoUsuario->id = usuarioEspecifico->perfilDoUsuario->id;
         usuAux->listaDeAmigos->perfilDoUsuario->idade = usuarioEspecifico->perfilDoUsuario->idade;
         usuAux->listaDeAmigos->perfilDoUsuario->nome = usuarioEspecifico->perfilDoUsuario->nome;
-        // printf("\n\nAmigo do U.A.:\n\n");
-        // imprimirPerfil(usuAux->listaDeAmigos->perfilDoUsuario);
 
         pilha = removeSolicitacao(pilha);
         usuarioEspecifico->amigosPendentes = pilha;
