@@ -92,7 +92,7 @@ int main()
             usuarioEspecifico = procuraUserId(usuario, op);
             break;
         case 6: // ver convites recebidos
-            printf("\n Solicitacoes de amizade para %s:\n", usuarioEspecifico->perfilDoUsuario->nome);
+            printf("\n %d solicitacoes de amizade para %s:\n",numSolicitacoes(usuarioEspecifico->amigosPendentes),usuarioEspecifico->perfilDoUsuario->nome);
             imprimirSolicitacao(usuarioEspecifico->amigosPendentes, usuario);
             break;
         case 7: // envia convites
@@ -167,9 +167,13 @@ int main()
             // if (procuraUserId(usuario, id1)->listaDeAmigos != NULL && procuraUserId(usuario, id2) != NULL)
             printf("\n\nEsses usuarios possuem %d amigos em comum\n\n", numAmigosEmComum(procuraUserId(usuario, id1), procuraUserId(usuario, id2)));
             break;
-
         case 25:
-            indicaAmigo(usuarioEspecifico,usuario);
+            indicaAmigo(usuarioEspecifico, usuario);
+            break;
+        case 27:
+            printf("\n\tVoce possui %d amigos.\n", numAmigos(usuarioEspecifico->listaDeAmigos));
+            if (numAmigos(usuarioEspecifico->listaDeAmigos) != 0)
+                imprimirAmigos(usuarioEspecifico);
             break;
         case 100: // faz logout da conta de um usuario
             usuarioEspecifico = NULL;

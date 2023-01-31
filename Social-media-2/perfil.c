@@ -375,15 +375,17 @@ User *indicaAmigo(User *usuarioEspecifico, User *lista)
     User *userAux = usuarioEspecifico;
     User *listaAux = lista;
 
-    if(usuarioEspecifico==NULL || listaAux->listaDeAmigos==NULL)
+    if (usuarioEspecifico == NULL || listaAux->listaDeAmigos == NULL){
+        printf("\n\n\tNenhum sugestao de amizade disponivel para voce.\n\n");
         return NULL;
+    }
 
     while (listaAux != NULL)
     {
         if (userAux->perfilDoUsuario->id != listaAux->perfilDoUsuario->id && verificaListaAmigos(listaAux->listaDeAmigos, userAux->perfilDoUsuario->id) == 0)
         { // condições para nao dar match com ele mesmo ou com alguem que ja é amigo
 
-            atual = numAmigosEmComum(userAux, listaAux); //encontra o numero de amigos em comum do user em questao e dos users da lista e compara
+            atual = numAmigosEmComum(userAux, listaAux); // encontra o numero de amigos em comum do user em questao e dos users da lista e compara
             if (atual > maior)
             {
                 maior = atual;
@@ -393,35 +395,14 @@ User *indicaAmigo(User *usuarioEspecifico, User *lista)
         listaAux = listaAux->proximo;
     }
 
-    printf("\n\n\no indicado para ser seu amigo eh %s pois ele tem %d amigos em comum com voce\n\n\n",guardaUser->perfilDoUsuario->nome,maior);
-    return guardaUser;
+    if (maior == 0)
+    {
+        printf("\n\n\tNenhuma sugestao de amizade disponivel para voce.\n\n");
+        return NULL;
+    }
+    else
+    {
+        printf("\n\n\nSugestao de amizade: %s (id: %d) - Voces tem %d amigo(s) em comum \n\n\n", guardaUser->perfilDoUsuario->nome,guardaUser->perfilDoUsuario->id, maior);
+        return guardaUser;
+    }
 }
-
-// User* amigosEmComum(User *usuarioEspecifico,User *listaUser){
-//         User* listaAux = listaUser->listaDeAmigos;
-//         User *listaAux2 = NULL;
-//         if(listaUser == NULL)return listaUser;
-//         while(listaAux != NULL){
-//             listaAux2 = procuraUserId(usuarioEspecifico->listaDeAmigos,listaAux->perfilDoUsuario->id);
-//             if(listaAux2 == NULL){
-//                 //continua codando para achar os em comum
-//                 listaAux2 = usuarioEspecifico->listaDeAmigos;
-//                 while (listaAux2 != NULL){
-//                     if(procuraUserId(listaAux2->listaDeAmigos,listaAux->perfilDoUsuario->id) != NULL)
-//                         return procuraUserId(listaAux2->listaDeAmigos,listaAux->perfilDoUsuario->id);
-//                     listaAux2->proximo;
-//                 }
-
-//             }else{
-//                //o usuario ja é amigo
-//             }
-
-//             listaAux->proximo;
-//         }
-//         return amigosEmComum(usuarioEspecifico, listaUser->proximo);
-// }
-// User* recomendarAmizade(int idPerfil, User *listaUser){
-
-//     User *usuarioEspecifico=procuraUserId(listaUser,idPerfil);
-
-// }
