@@ -6,7 +6,7 @@
 int main()
 {
     // inicializa as variaveis e as Structs
-    int op, comando;
+    int op, comando, id1, id2;
     User *usuario = NULL;           // lista geral de todos os usuarios
     User *usuarioEspecifico = NULL; // lista para logar com um usuario em especifico
     do
@@ -90,10 +90,9 @@ int main()
             printf("\n Digite o id do usuario: ");
             scanf("%d", &op);
             usuarioEspecifico = procuraUserId(usuario, op);
-            imprimirUsers(usuarioEspecifico);
             break;
         case 6: // ver convites recebidos
-            printf("\n Solicitacoes de amizade para %s:",usuarioEspecifico->perfilDoUsuario->nome);
+            printf("\n Solicitacoes de amizade para %s:\n", usuarioEspecifico->perfilDoUsuario->nome);
             imprimirSolicitacao(usuarioEspecifico->amigosPendentes, usuario);
             break;
         case 7: // envia convites
@@ -157,6 +156,20 @@ int main()
         case 15: // verifica numero de solicitacoes do usuario
             if (quemEhOPerfilMaisAmigo(usuario) != NULL)
                 imprimirPerfil(quemEhOPerfilMaisAmigo(usuario)->perfilDoUsuario);
+            break;
+        case 20:
+            imprimirUsers(usuario);
+            printf("\nDigite o id1");
+            scanf("%d", &id1);
+            printf("\nDigite o id2");
+            scanf("%d", &id2);
+            // if (procuraUserId(usuario, id1) != NULL && procuraUserId(usuario, id2) != NULL)
+            // if (procuraUserId(usuario, id1)->listaDeAmigos != NULL && procuraUserId(usuario, id2) != NULL)
+            printf("\n\nEsses usuarios possuem %d amigos em comum\n\n", numAmigosEmComum(procuraUserId(usuario, id1), procuraUserId(usuario, id2)));
+            break;
+
+        case 25:
+            indicaAmigo(usuarioEspecifico,usuario);
             break;
         case 100: // faz logout da conta de um usuario
             usuarioEspecifico = NULL;

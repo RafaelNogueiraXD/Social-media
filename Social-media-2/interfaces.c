@@ -3,7 +3,7 @@ int intercefaceGeral(User * usuario, User *listaUsuarios){
     int comando = 0;
         //system("clear");
         //mostra todas as opcoes para o usuario
-        printf("\n Opcoes Gerais: \t\t\tNumero usuarios: %d \n", numUsuarios(listaUsuarios));
+        printf("\n Opcoes Gerais: \t\t\tUsuarios Registrados: %d \n", numUsuarios(listaUsuarios));
         printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");
         printf("\n\t2 - mostra Usuarios");

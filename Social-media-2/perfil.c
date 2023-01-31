@@ -97,7 +97,8 @@ void imprimirUsers(User *usuarios)
 void imprimirAmigos(User *UsuarioEspecifico)
 {
     User *UserAux = UsuarioEspecifico->listaDeAmigos;
-    if(UserAux==NULL)printf("\n\tO usuario nao possui amigos.");
+    if (UserAux == NULL)
+        printf("\n\tO usuario nao possui amigos.");
 
     printf("\n\tOs amigos de %s sao: ", UsuarioEspecifico->perfilDoUsuario->nome);
 
@@ -105,7 +106,7 @@ void imprimirAmigos(User *UsuarioEspecifico)
     {
         // imprimirPerfil(UserAux->perfilDoUsuario);
         if (UserAux->proximo == NULL)
-            printf("%s.", UserAux->perfilDoUsuario->nome);
+            printf("%s.\n\n", UserAux->perfilDoUsuario->nome);
         else
             printf("%s , ", UserAux->perfilDoUsuario->nome);
         UserAux = UserAux->proximo;
@@ -182,7 +183,6 @@ Perfil *procuraUserId2(User *usuarios, int id)
         return procuraUserId2(usuarios->proximo, id);
 }
 
-Perfil *printaAmigos(User *usuarios) {}
 // procura usuario por Nome e retorna perfil
 Perfil *procuraUserNome(User *usuarios, char nome[150])
 {
@@ -346,6 +346,57 @@ Função para realizar o “match” entre perfis. A ideia do “matching” é 
 perfis ainda não amigos para serem adicionados. A função deve retornar um perfil.
 Como métrica de similaridade, você pode utilizar a quantidade de amigos em comum.
 */
+
+int numAmigosEmComum(User *user1, User *user2)
+{
+
+    int contador = 0;
+    User *usuarioUm = user1->listaDeAmigos;
+    User *usuarioDois = user2->listaDeAmigos;
+
+    if (usuarioUm == NULL || usuarioDois == NULL)
+        return 0;
+
+    while (usuarioUm != NULL)
+    {
+        if (procuraUserId(usuarioDois, usuarioUm->perfilDoUsuario->id) != NULL)
+            contador++;
+        usuarioUm = usuarioUm->proximo;
+    }
+    usuarioDois = usuarioDois->proximo;
+
+    return contador;
+}
+
+User *indicaAmigo(User *usuarioEspecifico, User *lista)
+{
+    int maior = 0, atual = 0;
+    User *guardaUser;
+    User *userAux = usuarioEspecifico;
+    User *listaAux = lista;
+
+    if(usuarioEspecifico==NULL || listaAux->listaDeAmigos==NULL)
+        return NULL;
+
+    while (listaAux != NULL)
+    {
+        if (userAux->perfilDoUsuario->id != listaAux->perfilDoUsuario->id && verificaListaAmigos(listaAux->listaDeAmigos, userAux->perfilDoUsuario->id) == 0)
+        { // condições para nao dar match com ele mesmo ou com alguem que ja é amigo
+
+            atual = numAmigosEmComum(userAux, listaAux); //encontra o numero de amigos em comum do user em questao e dos users da lista e compara
+            if (atual > maior)
+            {
+                maior = atual;
+                guardaUser = listaAux;
+            }
+        }
+        listaAux = listaAux->proximo;
+    }
+
+    printf("\n\n\no indicado para ser seu amigo eh %s pois ele tem %d amigos em comum com voce\n\n\n",guardaUser->perfilDoUsuario->nome,maior);
+    return guardaUser;
+}
+
 // User* amigosEmComum(User *usuarioEspecifico,User *listaUser){
 //         User* listaAux = listaUser->listaDeAmigos;
 //         User *listaAux2 = NULL;
