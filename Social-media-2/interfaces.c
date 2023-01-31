@@ -3,7 +3,7 @@ int intercefaceGeral(User * usuario, User *listaUsuarios){
     int comando = 0;
         //system("clear");
         //mostra todas as opcoes para o usuario
-        printf("\n Opcoes Gerais: \t\t\tNº usuarios: %d \n", numUsuarios(listaUsuarios));
+        printf("\n Opcoes Gerais: \t\t\tNumero usuarios: %d \n", numUsuarios(listaUsuarios));
         printf("\n\t0 - Fechar programa");
         printf("\n\t1 - cria novo Usuario");
         printf("\n\t2 - mostra Usuarios");
@@ -28,13 +28,13 @@ int intercefaceGeral(User * usuario, User *listaUsuarios){
         }
         printf("\nEscolha: ");
         scanf("%d",&comando);
+        getchar();
         //se nao tem usuario no sistema e o usuario tentar acessar uma 
         //opcao acima de 5(salvo 3 exceções) ele será barrado
         if(usuario == NULL && comando>5 && comando!=99 && comando!=13 && comando!=15){
             printf("Digite uma opcao valida\n");
             return intercefaceGeral(usuario,listaUsuarios);
         }
-        getchar();
         return comando; 
 }
 //func responsavel por injetar 10 usuarios aleatorios

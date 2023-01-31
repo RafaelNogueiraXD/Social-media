@@ -2,7 +2,7 @@ Perfil *randomPerfil()
 {
     Perfil *usuario = (Perfil *)malloc(sizeof(Perfil));
     usuario->nome = (char *)malloc(sizeof(char) * 150);
-    usuario->id = NULL;
+    usuario->id = usuario->id;
     char numChar[5], name[20] = "endrew";
     sprintf(numChar, "%d", rand() % 100);
     strncat(name, numChar, 5);
