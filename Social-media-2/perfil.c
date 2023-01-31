@@ -16,12 +16,13 @@ struct user
     struct user *proximo;                    // ponteiro para o próximo usuario da lista
 };
 typedef struct user User;
-
+//aloca e preenche uma struct perfil
 Perfil *addPerfil()
 {
     Perfil *usuario = (Perfil *)malloc(sizeof(Perfil));
     usuario->nome = (char *)malloc(sizeof(char) * 150);
     usuario->id = NULL;
+    //entrada de dados
     printf("\n digite o nome do Usuario:");
     gets(usuario->nome);
     printf("\n digite a idade:");
@@ -29,11 +30,11 @@ Perfil *addPerfil()
     getchar();
     return usuario;
 }
-
+//aloca e preenche uma struct User
 User *insereUser(User *lista)
 {
     int contId = 1;
-    if (lista == NULL)
+    if (lista == NULL) // se for o 1 usuario do sistema
     {
         User *usuario = (User *)malloc(sizeof(User));
         usuario->perfilDoUsuario = addPerfil();
@@ -43,7 +44,7 @@ User *insereUser(User *lista)
         usuario->proximo = NULL;
         return usuario;
     }
-    else
+    else // se for o N usuario do sistema
     {
         User *listaAux = lista;
         while (listaAux->proximo != NULL)

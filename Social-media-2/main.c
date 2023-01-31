@@ -5,12 +5,13 @@
 #include "interfaces.c"
 int main()
 {
+    //inicializa as variaveis e as Structs
     int op, comando;
-    User *usuario = NULL;
-    User *usuarioEspecifico = NULL;
-
+    User *usuario = NULL; // lista geral de todos os usuarios
+    User *usuarioEspecifico = NULL; // lista para logar com um usuario em especifico
     do
     {
+        //imprimi menu e retorna a condicao do switch
         comando = intercefaceGeral(usuarioEspecifico, usuario);
         switch (comando)
         {
@@ -25,14 +26,14 @@ int main()
             printf("\n Deseja procurar por:\n\t 1 - nome\n\t 2 - ID\nEscolha: ");
             scanf("%d", &op);
             getchar();
-            if (op == 1)
+            if (op == 1) // opcao para procurar por nome
             {
                 char nome[150];
                 printf("\n Digite o nome do usuario: ");
                 gets(nome);
                 imprimirPerfil(procuraUserNome(usuario, nome));
             }
-            else if (op == 2)
+            else if (op == 2) // opcao para procurar por ID
             {
                 printf("\n Digite o id do usuario: ");
                 scanf("%d", &op);
@@ -49,7 +50,7 @@ int main()
             printf("\n Deseja apagar por:\n\t1 - Nome\n\t2 - ID\nEscolha: ");
             scanf("%d", &op);
             getchar();
-            if (op == 1)
+            if (op == 1)// opcao para procurar por nome
             {
                 char nome[150];
                 printf("\n Digite o nome do usuario: ");
@@ -59,7 +60,7 @@ int main()
                         usuarioEspecifico = NULL;
                 usuario = removeUserNome(usuario, nome);
             }
-            else if (op == 2)
+            else if (op == 2)// opcao para procurar por ID
             {
                 printf("\n Digite o id do usuario que deseja remover: ");
                 scanf("%d", &op);
@@ -73,7 +74,7 @@ int main()
                 printf("\n opcao invalida \n");
             }
             break;
-        case 5: // seleciona usuario
+        case 5: // seleciona usuario por ID
             imprimirUsers(usuario);
             printf("\n Digite o id do usuario: ");
             scanf("%d", &op);
@@ -92,9 +93,11 @@ int main()
                 printf("\n Digite o id de outro usuario: ");
                 scanf("%d", &op);
             } while (usuarioEspecifico->perfilDoUsuario->id == op);
+
+            //procura usuario digitado
             futuroAmigo = procuraUserId(usuario, op);
 
-            if (futuroAmigo != NULL)
+            if (futuroAmigo != NULL)//se futuroAmigo for diferente de nulo a solitacao nao enviada
             {
                 if (verificaFila(op, usuarioEspecifico->amigosPendentes) == 1)
                 {
@@ -119,28 +122,28 @@ int main()
             printf("\n recusando convite ... ");
             usuarioEspecifico->amigosPendentes = removeSolicitacao(usuarioEspecifico->amigosPendentes);
             break;
-        case 20:
+        case 10://aceita todos os convites
             usuarioEspecifico->amigosPendentes = aceitaTodas(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
             break;
-        case 21:
+        case 11: // recusa todos os convites
             usuarioEspecifico->amigosPendentes = rejeitaTodos(usuarioEspecifico->amigosPendentes, usuarioEspecifico, usuario);
             break;
-        case 23:
-            printf("\n\n\n\nnumAmigos=%d\n\n\n\n", numAmigos(usuarioEspecifico->listaDeAmigos));
+        case 12: //verifica o numero de amigos 
+            printf("\n\n\n\nnumero de Amigos: %d\n\n\n\n", numAmigos(usuarioEspecifico->listaDeAmigos));
             break;
-        case 24:
-            printf("\n\n\n\nnumUsers=%d\n\n\n\n", numUsuarios(usuario));
+        case 13: // verifica numero de usuarios no sistema
+            printf("\n\n\n\nnumero de Usuarios: %d\n\n\n\n", numUsuarios(usuario));
             break;
-        case 25:
-            printf("\n\n\n\nnumsolicitacoes=%d\n\n\n\n", numSolicitacoes(usuarioEspecifico->amigosPendentes));
+        case 14: // verifica numero de solicitacoes do usuario
+            printf("\n\n\n\nnumero de solicitacoes: %d\n\n\n\n", numSolicitacoes(usuarioEspecifico->amigosPendentes));
             break;
-        case 27:
+        case 15:// verifica numero de solicitacoes do usuario
         if(quemEhOPerfilMaisAmigo(usuario)!=NULL)
             imprimirPerfil(quemEhOPerfilMaisAmigo(usuario)->perfilDoUsuario);
-        case 100:
+        case 100:// faz logout da conta de um usuario
             usuarioEspecifico = NULL;
             break;
-        case 99:
+        case 99: // injeta 10 usuarios no sistema
             usuario = injetarUsuarios(usuario);
             break;
         default:
@@ -150,22 +153,4 @@ int main()
         // printf("\n\n\tClique qualquer botao para continuar!");
         //  getch();
     } while (comando != 0);
-    // usuario = insereUser(usuario);
-    // printf("\nDigite o nome do usuario que deseja ver: ");
-    // gets(op);
-    // imprimirPerfil(procuraUserNome(usuario,op));
-
-    // Fila *filateste = NULL;
-    // filateste = insereSolicitacao(filateste, 1);
-    // filateste = insereSolicitacao(filateste, 2);
-    // filateste = insereSolicitacao(filateste, 3);
-    // usuarioEspecifico->listaDeAmigos = filateste;
-    // printf("\n \n mostra lista de Solicitacoes:");
-    // printf("\n\n\tid\t|\tidade\n");
-    // imprimirSolicitacao(usuarioEspecifico->listaDeAmigos, usuario);
-
-    // filateste = removeSolicitacao(filateste);
-
-    // printf("\n \n mostra lista:");
-    // imprimirSolicitacao(filateste);
 }

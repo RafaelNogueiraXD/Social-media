@@ -1,13 +1,13 @@
 // funcoes da fila de requisições
 #include "perfil.c"
-
+//cria a struct responsavel pelas Solicitacoes de amizades
 typedef struct filaRequisicoes
 {
     int id;
     struct filaRequisicoes *proximo;
 } Fila;
 
-
+//retorna o numero de solicitacoes 
 int numSolicitacoes(Fila *pilha){
 
     Fila *pilhaux=pilha;
@@ -23,7 +23,7 @@ int numSolicitacoes(Fila *pilha){
     return contador;
 }
 
-
+//funcao responsavel para verificar se um determinado ID existe na lista
 int verificaFila(int id, Fila *pilha)
 {
     Fila *pilhaux = pilha;
@@ -41,7 +41,7 @@ int verificaFila(int id, Fila *pilha)
     printf("retornou 0");
     return 0;
 }
-
+//funcao responsavel por enviar as solicitacoes
 Fila *enviaSolicitacao(Fila *pilha, int id)
 {
     if (pilha == NULL)
@@ -59,7 +59,7 @@ Fila *enviaSolicitacao(Fila *pilha, int id)
         return filaReq;
     }
 }
-
+//funcao responsavel por remover uma solicitacao
 Fila *removeSolicitacao(Fila *pilha)
 {
     if (pilha != NULL)
@@ -71,7 +71,7 @@ Fila *removeSolicitacao(Fila *pilha)
     else
         return NULL;
 }
-
+//funcao responsavel por remover todas as solicitacoes
 Fila *rejeitaTodos(Fila *pilha, User *usuarioEspecifico, User *usuarios)
 {
 
@@ -81,7 +81,7 @@ Fila *rejeitaTodos(Fila *pilha, User *usuarioEspecifico, User *usuarios)
     }
     return pilha;
 }
-
+//funcao responsavel por aceitar todas solicitacoes
 Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
 {
     if (pilha != NULL)
@@ -90,12 +90,12 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
         User *usuAux = NULL;
         User *proximoAux1 = NULL, *proximoAux2 = NULL;
         User *amigo1 = NULL, *amigo2 = NULL;
-
+        //primeiro acha o usuario no sistema por meio da func procuraUserId()
         usuAux = procuraUserId(usuarios, pilha->id);
 
         if (usuAux == NULL)
             return NULL;
-
+        //aloca os ponteiros para a insercao dos novos amigos
         amigo1 = (User *)malloc(sizeof(User));
         amigo1->perfilDoUsuario = (Perfil *)malloc(sizeof(Perfil));
         amigo1->perfilDoUsuario->nome = (char *)malloc(sizeof(char) * 150);
@@ -103,7 +103,11 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
         amigo2 = (User *)malloc(sizeof(User));
         amigo2->perfilDoUsuario = (Perfil *)malloc(sizeof(Perfil));
         amigo2->perfilDoUsuario->nome = (char *)malloc(sizeof(char) * 150);
-
+        /*
+            Se o usuario nao tiver amigos sera adicionado a struct arressem alocada 
+            para dentro da lista de amigos dele, caso o contrario o novo 
+            sera colacodo  em 1 primeiro da lista de amigos
+        */
         if (usuarioEspecifico->listaDeAmigos == NULL)
         {
             usuarioEspecifico->listaDeAmigos = amigo1;
@@ -116,7 +120,9 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
             usuarioEspecifico->listaDeAmigos = amigo1;
             usuarioEspecifico->listaDeAmigos->proximo = proximoAux1;
         }
-
+        /*
+            Adicionando o usuario(logado) na lista de amigos do seu novo amigo
+        */
         if (usuAux->listaDeAmigos == NULL)
         {
             usuAux->listaDeAmigos = amigo2;
@@ -129,16 +135,16 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
             usuAux->listaDeAmigos = amigo2;
             usuAux->listaDeAmigos->proximo = proximoAux2;
         }
-
+        //atribuindo os valores do novo amigo ao usuario logado
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->id = usuAux->perfilDoUsuario->id;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->idade = usuAux->perfilDoUsuario->idade;
         usuarioEspecifico->listaDeAmigos->perfilDoUsuario->nome = usuAux->perfilDoUsuario->nome;
 
-
+        //atribuindo os valores do usuario logado ao novo amigo
         usuAux->listaDeAmigos->perfilDoUsuario->id = usuarioEspecifico->perfilDoUsuario->id;
         usuAux->listaDeAmigos->perfilDoUsuario->idade = usuarioEspecifico->perfilDoUsuario->idade;
         usuAux->listaDeAmigos->perfilDoUsuario->nome = usuarioEspecifico->perfilDoUsuario->nome;
-
+        //removendo o convite da pilha de solicitacoes do usuario logado
         pilha = removeSolicitacao(pilha);
         usuarioEspecifico->amigosPendentes = pilha;
         return usuarioEspecifico->amigosPendentes;
@@ -146,7 +152,7 @@ Fila *aceitaSolicitacao(Fila *pilha, User *usuarioEspecifico, User *usuarios)
     else
         return NULL;
 }
-
+//aceita todos os convites 
 Fila *aceitaTodas(Fila *pilha, User *usuarioEspecifico, User *usuarios)
 {
     while (pilha != NULL)
@@ -155,7 +161,7 @@ Fila *aceitaTodas(Fila *pilha, User *usuarioEspecifico, User *usuarios)
     }
     return pilha;
 }
-
+//imprimi na tela todas as solicitacoes 
 void imprimirSolicitacao(Fila *pilha, User *usuarios)
 {
     if (pilha == NULL)
