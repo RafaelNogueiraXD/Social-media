@@ -200,7 +200,7 @@ Perfil *procuraUserNome(User *usuarios, char nome[150])
     else
         return procuraUserNome(usuarios->proximo, nome);
 }
-
+//procura o usuario por nome e retorna a struct
 User *procuraUserNome2(User *usuarios, char nome[150])
 {
     User *userAux = usuarios;
@@ -259,7 +259,7 @@ int removeUserId(User *usuarios, int id)
     else
         return 0;
 }
-
+//remove usuario por nome e retorna 0(nao foi removido) ou 1(foi removido)
 int removeUserNome(User *usuarios, char nome[150])
 {
     int removido = 0;
@@ -304,7 +304,7 @@ int removeUserNome(User *usuarios, char nome[150])
     else
         return 0;
 }
-
+//verifica o perfil com mais mais amigos e retorna a STRUCT
 User *quemEhOPerfilMaisAmigo(User *listaUser)
 {
 
@@ -342,9 +342,7 @@ int verificaListaAmigos(User *amigosDoUsuario, int idEspecifico)
     return 0;
 }
 /*
-Função para realizar o “match” entre perfis. A ideia do “matching” é sugerir ao usuário
-perfis ainda não amigos para serem adicionados. A função deve retornar um perfil.
-Como métrica de similaridade, você pode utilizar a quantidade de amigos em comum.
+Função para realizar o “match” entre perfis. 
 */
 
 int numAmigosEmComum(User *user1, User *user2)
