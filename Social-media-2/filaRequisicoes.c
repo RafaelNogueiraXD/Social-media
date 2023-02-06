@@ -8,7 +8,7 @@ typedef struct filaRequisicoes
 } Fila;
 
 // retorna o numero de solicitacoes
-int numSolicitacoes(Fila *row)
+int numSolicitacoes(Fila *row) // Funçao feita por Rafael
 {
 
     Fila *rowAux = row;
@@ -27,7 +27,7 @@ int numSolicitacoes(Fila *row)
 }
 
 // funcao responsavel para verificar se um determinado ID existe na lista
-int verificaFila(int id, Fila *row)
+int verificaFila(int id, Fila *row) // Funçao feita por Rafael
 {
     Fila *rowAux = row;
 
@@ -41,7 +41,7 @@ int verificaFila(int id, Fila *row)
     return 0;
 }
 // funcao responsavel por enviar as solicitacoes
-Fila *enviaSolicitacao(Fila *row, int id)
+Fila *enviaSolicitacao(Fila *row, int id) // Funçao feita por Rafael
 {
     if (row == NULL)
     {
@@ -59,7 +59,7 @@ Fila *enviaSolicitacao(Fila *row, int id)
     }
 }
 // funcao responsavel por remover uma solicitacao
-Fila *removeSolicitacao(Fila *row)
+Fila *removeSolicitacao(Fila *row) // Funçao feita por Rafael
 {
     if (row != NULL)
     {
@@ -71,7 +71,7 @@ Fila *removeSolicitacao(Fila *row)
         return NULL;
 }
 // funcao responsavel por remover todas as solicitacoes
-Fila *rejeitaTodos(Fila *row, User *usuarioEspecifico, User *usuarios)
+Fila *rejeitaTodos(Fila *row, User *usuarioEspecifico, User *usuarios) // Funçao feita por Thiago
 {
 
     while (row != NULL)
@@ -81,7 +81,7 @@ Fila *rejeitaTodos(Fila *row, User *usuarioEspecifico, User *usuarios)
     return row;
 }
 // funcao responsavel por aceitar todas solicitacoes
-Fila *aceitaSolicitacao(Fila *row, User *usuarioEspecifico, User *usuarios)
+Fila *aceitaSolicitacao(Fila *row, User *usuarioEspecifico, User *usuarios) // Funçao feita por Thiago
 {
     if (row != NULL)
     {
@@ -153,7 +153,7 @@ Fila *aceitaSolicitacao(Fila *row, User *usuarioEspecifico, User *usuarios)
 }
 
 // aceita todos os convites
-Fila *aceitaTodas(Fila *row, User *usuarioEspecifico, User *usuarios)
+Fila *aceitaTodas(Fila *row, User *usuarioEspecifico, User *usuarios) // Funçao feita por Thiago
 {
     while (row != NULL)
     {
@@ -162,7 +162,7 @@ Fila *aceitaTodas(Fila *row, User *usuarioEspecifico, User *usuarios)
     return row;
 }
 // imprimi na tela todas as solicitacoes
-void imprimirSolicitacao(Fila *row, User *usuarios)
+void imprimirSolicitacao(Fila *row, User *usuarios) // Funçao feita por Rafael
 {
     if (row == NULL)
         printf("\n\nFim da lista\n\n");

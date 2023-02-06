@@ -1,3 +1,5 @@
+//código feito por Thiago Bortoluzzi e Rafael Nogueira
+
 // funcoes da struct Perfil
 struct perfil
 {
@@ -17,7 +19,7 @@ struct user
 };
 typedef struct user User;
 // aloca e preenche uma struct perfil
-Perfil *addPerfil()
+Perfil *addPerfil() // Funçao feita por Rafael
 {
     Perfil *usuario = (Perfil *)malloc(sizeof(Perfil));
     usuario->nome = (char *)malloc(sizeof(char) * 150);
@@ -31,7 +33,7 @@ Perfil *addPerfil()
     return usuario;
 }
 // aloca e preenche uma struct User
-User *insereUser(User *lista)
+User *insereUser(User *lista) // Funçao feita por Rafael
 {
     int contId = 1;
     if (lista == NULL) // se for o 1 usuario do sistema
@@ -65,7 +67,7 @@ User *insereUser(User *lista)
     }
 }
 // imprime perfil
-void imprimirPerfil(Perfil *usuarios)
+void imprimirPerfil(Perfil *usuarios) // Funçao feita por Rafael
 {
     if (usuarios == NULL)
         return;
@@ -75,7 +77,7 @@ void imprimirPerfil(Perfil *usuarios)
 }
 
 // imprime usuarios
-void imprimirUsers(User *usuarios)
+void imprimirUsers(User *usuarios) // Funçao feita por Rafael
 {
     static int tabela = 0;
     if (tabela == 0)
@@ -94,7 +96,7 @@ void imprimirUsers(User *usuarios)
 }
 
 // imprime amigos
-void imprimirAmigos(User *UsuarioEspecifico)
+void imprimirAmigos(User *UsuarioEspecifico) // Funçao feita por Rafael
 {
     User *UserAux = UsuarioEspecifico->listaDeAmigos;
     if (UserAux == NULL)
@@ -114,7 +116,7 @@ void imprimirAmigos(User *UsuarioEspecifico)
 }
 
 // procura usuario por ID (funcao recursiva) retorna User
-User *procuraUserId(User *usuarios, int id)
+User *procuraUserId(User *usuarios, int id) // Funçao feita por Rafael
 {
     if (usuarios == NULL)
     {
@@ -132,7 +134,7 @@ User *procuraUserId(User *usuarios, int id)
 }
 
 // retorna o numero total amigos de um determinado usuario
-int numAmigos(User *AmigosUsuario)
+int numAmigos(User *AmigosUsuario) // Funçao feita por Thiago
 {
 
     User *AmigoAux = AmigosUsuario;
@@ -150,7 +152,7 @@ int numAmigos(User *AmigosUsuario)
     return contador;
 }
 // retorna o numero total usuarios do sistema
-int numUsuarios(User *usuarios)
+int numUsuarios(User *usuarios) // Funçao feita por Thiago
 {
 
     User *usuaux = usuarios;
@@ -168,7 +170,7 @@ int numUsuarios(User *usuarios)
     return contador;
 }
 // retorna o perfil de um usuario com base no ID
-Perfil *procuraUserId2(User *usuarios, int id)
+Perfil *procuraUserId2(User *usuarios, int id) // Funçao feita por Rafael
 {
     if (usuarios == NULL)
     {
@@ -184,7 +186,7 @@ Perfil *procuraUserId2(User *usuarios, int id)
 }
 
 // procura usuario por Nome e retorna perfil
-Perfil *procuraUserNome(User *usuarios, char nome[150])
+Perfil *procuraUserNome(User *usuarios, char nome[150]) // Funçao feita por Rafael
 {
     if (usuarios == NULL)
     {
@@ -201,7 +203,7 @@ Perfil *procuraUserNome(User *usuarios, char nome[150])
         return procuraUserNome(usuarios->proximo, nome);
 }
 //procura o usuario por nome e retorna a struct
-User *procuraUserNome2(User *usuarios, char nome[150])
+User *procuraUserNome2(User *usuarios, char nome[150]) // Funçao feita por Rafael
 {
     User *userAux = usuarios;
     if (userAux == NULL)
@@ -217,7 +219,7 @@ User *procuraUserNome2(User *usuarios, char nome[150])
 }
 
 // remove usuario pelo ID
-int removeUserId(User *usuarios, int id)
+int removeUserId(User *usuarios, int id) // Funçao feita por Rafael
 {
     int removido = 0;
     if (usuarios == NULL)
@@ -260,7 +262,7 @@ int removeUserId(User *usuarios, int id)
         return 0;
 }
 //remove usuario por nome e retorna 0(nao foi removido) ou 1(foi removido)
-int removeUserNome(User *usuarios, char nome[150])
+int removeUserNome(User *usuarios, char nome[150]) // Funçao feita por Rafael
 {
     int removido = 0;
     if (usuarios == NULL)
@@ -305,7 +307,7 @@ int removeUserNome(User *usuarios, char nome[150])
         return 0;
 }
 //verifica o perfil com mais mais amigos e retorna a STRUCT
-User *quemEhOPerfilMaisAmigo(User *listaUser)
+User *quemEhOPerfilMaisAmigo(User *listaUser) // Funçao feita por Thiago
 {
 
     int maior = 0, atual = 0;
@@ -326,7 +328,7 @@ User *quemEhOPerfilMaisAmigo(User *listaUser)
     return userAtual;
 }
 
-int verificaListaAmigos(User *amigosDoUsuario, int idEspecifico)
+int verificaListaAmigos(User *amigosDoUsuario, int idEspecifico) // Funçao feita por Thiago
 {
 
     User *amigosAux = amigosDoUsuario;
@@ -345,7 +347,7 @@ int verificaListaAmigos(User *amigosDoUsuario, int idEspecifico)
 Função para realizar o “match” entre perfis. 
 */
 
-int numAmigosEmComum(User *user1, User *user2)
+int numAmigosEmComum(User *user1, User *user2) // Funçao feita por Rafael
 {
 
     int contador = 0;
@@ -366,7 +368,7 @@ int numAmigosEmComum(User *user1, User *user2)
     return contador;
 }
 
-User *indicaAmigo(User *usuarioEspecifico, User *lista)
+User *indicaAmigo(User *usuarioEspecifico, User *lista) // Funçao feita por Thiago
 {
     int maior = 0, atual = 0;
     User *guardaUser;

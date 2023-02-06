@@ -1,3 +1,5 @@
+//código feito por Thiago Bortoluzzi e Rafael Nogueira
+
 #include "testes/factory.c"
 int intercefaceGeral(User * usuario, User *listaUsuarios){
     int comando = 0;

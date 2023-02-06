@@ -1,9 +1,10 @@
+//código feito por Thiago Bortoluzzi e Rafael Nogueira
 Perfil *randomPerfil()
 {
     Perfil *usuario = (Perfil *)malloc(sizeof(Perfil));
     usuario->nome = (char *)malloc(sizeof(char) * 150);
     usuario->id = usuario->id;
-    char numChar[5], name[20] = "endrew";
+    char numChar[5], name[20] = "user";
     sprintf(numChar, "%d", rand() % 100);
     strncat(name, numChar, 5);
     strcpy(usuario->nome, name);

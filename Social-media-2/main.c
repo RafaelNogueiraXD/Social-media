@@ -1,3 +1,4 @@
+//código feito por Thiago Bortoluzzi e Rafael Nogueira
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
